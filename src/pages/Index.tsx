@@ -313,7 +313,7 @@ const TestimonialsCarousel = () => {
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="py-16 sm:py-20 border-b border-white/5">
+    <section className="py-12 sm:py-16 lg:py-20 border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Cabeçalho */}
@@ -668,16 +668,17 @@ export default function Index() {
         </div>
 
         <div className="relative z-10 max-w-6xl w-full mx-auto">
-          <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-14 xl:gap-20">
+          <div className="flex flex-col lg:flex-row items-start gap-6 sm:gap-8 lg:gap-14 xl:gap-20">
 
             {/* ── LEFT: Copy ── */}
-            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex-1 min-w-0 space-y-5 lg:pt-4">
+            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex-1 min-w-0 space-y-6 lg:pt-4 min-h-[100svh] lg:min-h-0">
 
               {/* Badge */}
               <motion.div variants={fadeUp}>
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#D4A843]/8 border border-[#D4A843]/30 font-body text-[#D4A843] text-[11px] font-bold uppercase tracking-[0.15em]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4A843] animate-pulse" />
-                  Imersão Presencial · 26 de Junho · São Paulo
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl sm:rounded-full bg-[#D4A843]/8 border border-[#D4A843]/30 font-body text-[#D4A843] text-[11px] font-bold uppercase tracking-[0.15em]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4A843] flex-shrink-0 animate-pulse" />
+                  <span className="sm:hidden">26 Jun · SP · Presencial</span>
+                  <span className="hidden sm:inline">Imersão Presencial · 26 de Junho · São Paulo</span>
                 </span>
               </motion.div>
 
@@ -778,7 +779,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           PROBLEMA / CONTRASTE
           ══════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 section-elevated">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 section-elevated">
         <div className="max-w-4xl mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="space-y-10">
             <div className="text-center space-y-3">
@@ -837,7 +838,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           MÓDULOS
           ══════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto space-y-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="text-center space-y-3">
             <motion.div variants={fadeUp}>
@@ -891,7 +892,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           SPEAKER — THIAGO MARTINS
           ══════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 section-elevated">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 section-elevated">
         <div className="max-w-4xl mx-auto space-y-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="text-center space-y-3">
             <motion.div variants={fadeUp}>
@@ -908,7 +909,7 @@ export default function Index() {
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent z-20" />
             <div className="flex flex-col sm:flex-row">
               {/* Foto — substitua pelo <img> quando tiver o arquivo */}
-              <div className="relative sm:w-[220px] lg:w-[280px] sm:flex-shrink-0 h-48 sm:h-auto overflow-hidden bg-gradient-to-br from-primary/10 to-transparent flex items-center justify-center">
+              <div className="relative sm:w-[220px] lg:w-[280px] sm:flex-shrink-0 h-36 sm:h-auto overflow-hidden bg-gradient-to-br from-primary/10 to-transparent flex items-center justify-center">
                 <span className="font-display text-7xl text-primary/8">TM</span>
                 {/*
                   Para adicionar foto: descomente abaixo e adicione /public/thiago-speaker.webp
@@ -959,7 +960,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           PARA QUEM É / NÃO É
           ══════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto space-y-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="text-center space-y-3">
             <motion.div variants={fadeUp}>
@@ -1014,7 +1015,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           DEPOIMENTOS — VÍDEOS
           ══════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 border-b border-white/5">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/5">
         <div className="max-w-6xl mx-auto">
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
@@ -1091,7 +1092,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           FAQ
           ══════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 section-elevated">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 section-elevated">
         <div className="max-w-2xl mx-auto space-y-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="text-center space-y-3">
             <motion.div variants={fadeUp}>
@@ -1116,7 +1117,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           BOTTOM CTA — sem formulário duplicado
           ══════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-grid">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-grid">
         <div className="max-w-xl mx-auto text-center space-y-5">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={stagger}>
             <motion.div variants={fadeUp}>
@@ -1130,11 +1131,11 @@ export default function Index() {
               Nossa equipe pode responder todas as suas perguntas antes de você garantir sua vaga.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <CtaButton onClick={scrollToForm}>GARANTIR MINHA VAGA</CtaButton>
+              <CtaButton onClick={scrollToForm} className="w-full sm:w-auto justify-center">GARANTIR MINHA VAGA</CtaButton>
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=Quero%20saber%20mais%20sobre%20o%20Importa%20PRO%20Experience`}
                 target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded border border-white/12 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20 transition-all font-body text-white/60 hover:text-white text-[13px] font-semibold"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded border border-white/12 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20 transition-all font-body text-white/60 hover:text-white text-[13px] font-semibold w-full sm:w-auto"
               >
                 <MessageCircle className="w-4 h-4" /> Falar pelo WhatsApp
               </a>
