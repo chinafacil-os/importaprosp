@@ -15,7 +15,7 @@ import { z } from "zod";
 /* ─── Placeholders — substitua pelos valores reais ─── */
 const GOOGLE_SHEETS_URL = "";
 const WHATSAPP_NUMBER   = "5511999999999";
-const CURSO_FALLBACK_URL = "https://chinafacil.com";
+const CURSO_FALLBACK_URL = "https://wp.chinafacil.com/curso-importa-facil/";
 const PIXEL_EVENT_NAME  = "Importa PRO Experience 2026";
 /* ─────────────────────────────────────────────────── */
 
@@ -33,16 +33,34 @@ const contactSchema = z.object({
   telefone: z.string().trim().min(14, "Digite um telefone válido com DDD"),
 });
 
-const multiStepQuestions = [
+const multiStepQuestions: {
+  id: string;
+  label: string;
+  options: string[];
+  disqualify: string[];
+  type: "radio" | "text";
+}[] = [
   {
     id: "situacaoImportacao",
     label: "Qual sua situação atual com importação?",
     options: [
       "Já importo e quero escalar",
-      "Compro de fornecedores nacionais e quero importar direto",
+      "Compro de fornecedores no BR e quero importar",
       "Estou começando do zero",
     ],
-    disqualify: [] as string[],
+    disqualify: [],
+    type: "radio",
+  },
+  {
+    id: "disponibilidade",
+    label: "A imersão será presencial em SP. Você tem disponibilidade?",
+    options: [
+      "Sim, sou de SP / Posso viajar",
+      "Preciso entender a logística",
+      "Não tenho disponibilidade",
+    ],
+    disqualify: ["Não tenho disponibilidade"],
+    type: "radio",
   },
   {
     id: "faturamento",
@@ -54,15 +72,21 @@ const multiStepQuestions = [
       "Até R$ 30.000",
     ],
     disqualify: ["Até R$ 30.000"],
+    type: "radio",
   },
   {
     id: "capitalImportacao",
-    label: "Você possui no mínimo R$ 50.000 disponível para iniciar ou escalar sua importação?",
-    options: [
-      "Sim, tenho esse capital disponível",
-      "Não tenho esse valor no momento",
-    ],
-    disqualify: ["Não tenho esse valor no momento"],
+    label: "Você possui no mínimo R$ 50.000 disponível para importar?",
+    options: ["Sim", "Não"],
+    disqualify: ["Não"],
+    type: "radio",
+  },
+  {
+    id: "produto",
+    label: "Qual produto você tem interesse em importar?",
+    options: [],
+    disqualify: [],
+    type: "text",
   },
 ];
 
@@ -430,6 +454,8 @@ const StickyHeader = ({ onCtaClick }: { onCtaClick: () => void }) => {
 const MultiStepForm = () => {
   const [step, setStep]             = useState(0);
   const [answers, setAnswers]       = useState<Record<string, string>>({});
+  const [textInput, setTextInput]   = useState("");
+  const [textError, setTextError]   = useState("");
   const [contact, setContact]       = useState({ nome: "", email: "", telefone: "" });
   const [contactErrors, setCErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitErr] = useState("");
@@ -453,12 +479,14 @@ const MultiStepForm = () => {
       method: "POST", mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        Data:   new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }),
-        Nome:   contact.nome, "E-mail": contact.email, WhatsApp: contact.telefone,
-        Status: qualified ? "Qualificado" : "Desqualificado",
+        Data:    new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }),
+        Nome:    contact.nome, "E-mail": contact.email, WhatsApp: contact.telefone,
+        Status:  qualified ? "Qualificado" : "Desqualificado",
         "Situação com importação": cur.situacaoImportacao || "",
-        "Faturamento mensal":      cur.faturamento || "",
-        "Capital disponível":      cur.capitalImportacao || "",
+        "Disponibilidade SP":      cur.disponibilidade    || "",
+        "Faturamento mensal":      cur.faturamento        || "",
+        "Capital disponível":      cur.capitalImportacao  || "",
+        "Produto de interesse":    cur.produto            || "",
       }),
     });
   };
@@ -480,23 +508,33 @@ const MultiStepForm = () => {
     setStep(1);
   };
 
-  const handleOption = async (option: string) => {
+  const handleOption = (option: string) => {
     if (isSubmitting) return;
     const q = multiStepQuestions[qIndex];
     const next = { ...answers, [q.id]: option };
     setAnswers(next);
     if (q.disqualify.includes(option)) {
       setSubmit(true);
-      try { await sendToSheets(next, false); trackLead(); } catch { /**/ }
-      setSubmit(false); setStep(TOTAL_Q + 1); return;
-    }
-    if (step === TOTAL_Q) {
-      setSubmit(true);
-      try { await sendToSheets(next, true); trackLead(); navigate("/obrigado"); }
-      catch { setSubmitErr("Erro ao enviar. Tente novamente."); setSubmit(false); }
+      sendToSheets(next, false).catch(() => {}).finally(() => {
+        trackLead();
+        setSubmit(false);
+        setStep(TOTAL_Q + 1);
+      });
       return;
     }
     setStep(step + 1);
+  };
+
+  const handleTextSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!textInput.trim()) { setTextError("Por favor, descreva o produto."); return; }
+    setTextError("");
+    const q = multiStepQuestions[qIndex];
+    const next = { ...answers, [q.id]: textInput.trim() };
+    setAnswers(next);
+    setSubmit(true);
+    try { await sendToSheets(next, true); trackLead(); navigate("/obrigado"); }
+    catch { setSubmitErr("Erro ao enviar. Tente novamente."); setSubmit(false); }
   };
 
   const handleChange = (field: "nome"|"email"|"telefone", value: string) => {
@@ -510,19 +548,22 @@ const MultiStepForm = () => {
   /* Tela de desqualificação */
   if (step === TOTAL_Q + 1) {
     return (
-      <div className="bg-card border border-white/8 rounded-xl p-5 sm:p-8 text-center space-y-4">
-        <div className="w-11 h-11 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center mx-auto">
+      <div className="bg-card border border-white/8 rounded-xl p-5 sm:p-8 text-center space-y-5">
+        <div className="w-12 h-12 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center mx-auto">
           <XCircle className="w-5 h-5 text-white/30" />
         </div>
-        <div className="space-y-2">
-          <p className="font-display text-base text-white">Entendemos o seu momento</p>
-          <p className="font-body text-white/45 text-sm leading-relaxed max-w-xs mx-auto">
-            O Importa PRO ainda não é o próximo passo ideal para você. Temos uma opção mais adequada para o seu momento atual.
+        <div className="space-y-3">
+          <p className="font-display text-base text-white">Agradecemos seu interesse!</p>
+          <p className="font-body text-white/50 text-[13px] leading-relaxed max-w-sm mx-auto">
+            Pelos dados enviados, ainda não é o momento de importar via container, nem mesmo no compartilhado. Mas isso não te impede de começar.
+          </p>
+          <p className="font-body text-white/70 text-[13px] leading-relaxed max-w-sm mx-auto">
+            Recomendamos a <span className="text-white font-semibold">importação simplificada</span>, ideal para quem está iniciando. Você pode começar a partir de <span className="text-primary font-semibold">R$ 1.000</span>.
           </p>
         </div>
         <a href={CURSO_FALLBACK_URL} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-[#8B0A0A] via-[#BB1717] to-[#D44444] text-white font-body font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded hover:brightness-110 transition-all">
-          Ver opções disponíveis <ArrowRight className="w-3.5 h-3.5" />
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-[#8B0A0A] via-[#BB1717] to-[#D44444] text-white font-body font-bold text-[12px] uppercase tracking-wider px-5 py-3 rounded hover:brightness-110 transition-all">
+          Clique aqui e veja o passo a passo <ArrowRight className="w-3.5 h-3.5" />
         </a>
       </div>
     );
@@ -580,7 +621,7 @@ const MultiStepForm = () => {
                 </div>
               </div>
               <button type="submit" className="w-full bg-gradient-to-r from-[#8B0A0A] via-[#BB1717] to-[#D44444] text-white font-body font-bold text-[13px] uppercase tracking-wider py-3 rounded hover:brightness-110 transition-all flex items-center justify-center gap-2 glow-blue">
-                Continuar — responder 3 perguntas <ArrowRight className="w-3.5 h-3.5" />
+                Continuar — responder 4 perguntas <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <p className="text-center inline-flex items-center justify-center gap-1.5 w-full text-[10px] text-white/25 font-body">
                 <Shield className="w-2.5 h-2.5" /> Seus dados estão protegidos
@@ -590,17 +631,40 @@ const MultiStepForm = () => {
         ) : (
           <motion.div key={`q-${step}`} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.18 }} className="space-y-3">
             <p className="font-body font-semibold text-white text-[14px] leading-snug">{multiStepQuestions[qIndex]?.label}</p>
-            <div className="space-y-1.5">
-              {multiStepQuestions[qIndex]?.options.map(option => (
-                <button key={option} type="button" disabled={isSubmitting} onClick={() => handleOption(option)}
-                  className="w-full text-left px-3.5 py-3 rounded-lg border border-white/8 bg-white/[0.015] hover:border-primary/35 hover:bg-primary/5 transition-all duration-150 font-body text-white/60 hover:text-white text-[13px] flex items-center justify-between gap-3 group disabled:opacity-50 disabled:cursor-wait">
-                  <span>{option}</span>
-                  <ArrowRight className="w-3 h-3 text-white/15 group-hover:text-primary flex-shrink-0 transition-colors" />
+
+            {multiStepQuestions[qIndex]?.type === "text" ? (
+              <form onSubmit={handleTextSubmit} className="space-y-3">
+                <div className="space-y-1">
+                  <Input
+                    placeholder="Ex: eletrônicos, roupas, utilidades domésticas..."
+                    value={textInput}
+                    onChange={e => { setTextInput(e.target.value); if (textError) setTextError(""); }}
+                    disabled={isSubmitting}
+                    className="h-10 text-sm bg-black/25 border-white/12 text-white placeholder:text-white/25 focus:border-primary/50"
+                  />
+                  {textError && <p className="text-[10px] text-yellow-400">{textError}</p>}
+                </div>
+                <button type="submit" disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-[#8B0A0A] via-[#BB1717] to-[#D44444] text-white font-body font-bold text-[13px] uppercase tracking-wider py-3 rounded hover:brightness-110 transition-all flex items-center justify-center gap-2 glow-blue disabled:opacity-50 disabled:cursor-wait">
+                  {isSubmitting ? <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Enviando...</> : <>Garantir minha vaga <ArrowRight className="w-3.5 h-3.5" /></>}
                 </button>
-              ))}
-            </div>
+              </form>
+            ) : (
+              <div className="space-y-1.5">
+                {multiStepQuestions[qIndex]?.options.map(option => (
+                  <button key={option} type="button" disabled={isSubmitting} onClick={() => handleOption(option)}
+                    className="w-full text-left px-3.5 py-3 rounded-lg border border-white/8 bg-white/[0.015] hover:border-primary/35 hover:bg-primary/5 transition-all duration-150 font-body text-white/60 hover:text-white text-[13px] flex items-center justify-between gap-3 group disabled:opacity-50 disabled:cursor-wait">
+                    <span>{option}</span>
+                    <ArrowRight className="w-3 h-3 text-white/15 group-hover:text-primary flex-shrink-0 transition-colors" />
+                  </button>
+                ))}
+              </div>
+            )}
+
             {submitError  && <p className="text-xs text-yellow-400 text-center font-body">{submitError}</p>}
-            {isSubmitting && <div className="flex items-center justify-center gap-2 text-white/50 text-xs font-body"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Enviando...</div>}
+            {isSubmitting && multiStepQuestions[qIndex]?.type !== "text" && (
+              <div className="flex items-center justify-center gap-2 text-white/50 text-xs font-body"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Enviando...</div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
