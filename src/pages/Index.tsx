@@ -547,7 +547,7 @@ const MultiStepForm = () => {
 
 
   return (
-    <div className="bg-card border border-white/8 rounded-xl p-5 sm:p-6 space-y-4">
+    <div className="bg-card border border-primary/30 rounded-xl p-5 sm:p-6 space-y-4 shadow-[0_0_45px_rgba(187,23,23,0.15)] ring-1 ring-primary/10">
       {/* Progress */}
       <div className="space-y-2.5">
         <div className="flex justify-between items-center">
@@ -728,9 +728,16 @@ export default function Index() {
               className="w-full lg:w-[400px] xl:w-[420px] lg:flex-shrink-0 space-y-3"
             >
               {/* Form header */}
-              <div className="space-y-0.5">
-                <p className="font-body text-[10px] text-primary font-bold uppercase tracking-widest">Vagas limitadas</p>
-                <h3 className="font-display text-[1.1rem] text-white leading-snug">Garanta sua análise de participação</h3>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                  </span>
+                  <p className="font-body text-[10px] text-primary font-bold uppercase tracking-widest">Vagas limitadas</p>
+                </div>
+                <h3 className="font-display text-[1.2rem] text-white leading-snug">Garanta sua vaga no Importa PRO</h3>
+                <p className="font-body text-[12px] text-white/40">Preencha o formulário — nossa equipe entra em contato</p>
               </div>
               <MultiStepForm />
             </motion.div>
@@ -748,7 +755,7 @@ export default function Index() {
           STATS
           ══════════════════════════════════════ */}
       <section className="py-10 px-4 sm:px-6 border-b border-white/5">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto space-y-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger}
             className="grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
             {eventStats.map(s => (
@@ -758,6 +765,9 @@ export default function Index() {
                 <p className="font-body text-white/35 text-[11px] leading-snug">{s.desc}</p>
               </motion.div>
             ))}
+          </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={fadeUp} className="flex justify-center">
+            <CtaButton onClick={scrollToForm}>QUERO GARANTIR MINHA VAGA</CtaButton>
           </motion.div>
         </div>
       </section>
@@ -869,6 +879,9 @@ export default function Index() {
               );
             })}
           </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={fadeUp} className="flex justify-center pt-2">
+            <CtaButton onClick={scrollToForm}>QUERO APRENDER ISSO NA PRÁTICA</CtaButton>
+          </motion.div>
         </div>
       </section>
 
@@ -928,6 +941,9 @@ export default function Index() {
                 </div>
               </div>
             </div>
+          </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={fadeUp} className="flex justify-center">
+            <CtaButton onClick={scrollToForm}>GARANTIR MINHA VAGA COM THIAGO</CtaButton>
           </motion.div>
         </div>
       </section>
@@ -1050,6 +1066,9 @@ export default function Index() {
               </motion.div>
             ))}
           </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={fadeUp} className="flex justify-center pt-4">
+            <CtaButton onClick={scrollToForm}>QUERO RESULTADOS ASSIM</CtaButton>
+          </motion.div>
         </div>
       </section>
 
@@ -1084,6 +1103,9 @@ export default function Index() {
             {faqs.map((faq, i) => (
               <FaqItem key={i} item={faq} isOpen={openFaq === i} toggle={() => setOpenFaq(openFaq === i ? null : i)} />
             ))}
+          </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={fadeUp} className="flex justify-center pt-2">
+            <CtaButton onClick={scrollToForm}>GARANTIR MINHA VAGA</CtaButton>
           </motion.div>
         </div>
       </section>
