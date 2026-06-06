@@ -567,13 +567,6 @@ const MultiStepForm = () => {
       <AnimatePresence mode="wait">
         {step === 0 ? (
           <motion.div key="contact" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.18 }} className="space-y-4">
-            <div className="flex items-start gap-2.5 p-3 rounded-lg bg-primary/5 border border-primary/12">
-              <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-              <p className="font-body text-white/65 text-[13px] leading-relaxed">
-                <span className="text-white font-semibold">Análise de participação gratuita.</span>{" "}
-                Preencha e responda 3 perguntas rápidas.
-              </p>
-            </div>
             <form onSubmit={handleContactSubmit} className="space-y-3">
               <div className="space-y-1">
                 <Label htmlFor="ms-nome" className="text-[11px] font-body font-medium text-white/70">Nome completo</Label>
@@ -738,7 +731,6 @@ export default function Index() {
               <div className="space-y-0.5">
                 <p className="font-body text-[10px] text-primary font-bold uppercase tracking-widest">Vagas limitadas</p>
                 <h3 className="font-display text-[1.1rem] text-white leading-snug">Garanta sua análise de participação</h3>
-                <p className="font-body text-white/40 text-[13px]">Gratuita e sem compromisso.</p>
               </div>
               <MultiStepForm />
             </motion.div>
@@ -996,7 +988,6 @@ export default function Index() {
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={fadeUp} className="text-center pt-2">
             <CtaButton onClick={scrollToForm}>GARANTIR MINHA ANÁLISE DE PARTICIPAÇÃO</CtaButton>
-            <p className="font-body text-white/25 text-[11px] mt-2.5">Análise gratuita · Sem compromisso</p>
           </motion.div>
         </div>
       </section>
