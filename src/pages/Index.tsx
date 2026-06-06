@@ -674,7 +674,7 @@ export default function Index() {
             <motion.div initial="hidden" animate="visible" variants={stagger} className="flex-1 min-w-0 space-y-6 lg:pt-4">
 
               {/* Badge */}
-              <motion.div variants={fadeUp}>
+              <motion.div variants={fadeUp} className="mt-4 lg:mt-0">
                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#D4A843]/8 border border-[#D4A843]/30 font-body text-[#D4A843] text-[11px] font-bold uppercase tracking-[0.15em]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4A843] flex-shrink-0 animate-pulse" />
                   <span>Imersão Presencial</span>
@@ -684,20 +684,20 @@ export default function Index() {
               {/* Headline */}
               <motion.div variants={fadeUp} className="space-y-0.5">
                 <h1 className="font-display text-[clamp(1.6rem,3.5vw,2.75rem)] leading-[1.1] text-white">
-                  Enquanto muitos empresários{" "}
-                  <span className="text-white/35">reclamam da margem…</span>
+                  Você ainda{" "}
+                  <span className="text-white/35">paga intermediário?</span>
                 </h1>
                 <h1 className="font-display text-[clamp(1.6rem,3.5vw,2.75rem)] leading-[1.1]">
-                  <span className="text-gradient glow-text">outros compram direto da China</span>
-                  <span className="text-white"> e dominam o mercado.</span>
+                  <span className="text-white">Seu concorrente já compra </span>
+                  <span className="text-gradient glow-text">direto da China</span>
+                  <span className="text-white"> e ganha mais.</span>
                 </h1>
               </motion.div>
 
               {/* Subheadline */}
               <motion.p variants={fadeUp} className="font-body text-white/50 text-[15px] leading-relaxed max-w-lg">
-                Uma imersão presencial e exclusiva para empresários que querem importar com estratégia,{" "}
-                <span className="text-white/75 font-semibold">reduzir custos e multiplicar margem</span>{" "}
-                através de uma operação profissional.
+                1 dia em São Paulo para aprender a importar, cortar custo e aumentar seu lucro.{" "}
+                <span className="text-white/75 font-semibold">Sem enrolação.</span>
               </motion.p>
 
               {/* Event chips */}
@@ -716,8 +716,7 @@ export default function Index() {
               {/* Mobile-only CTA */}
               <motion.div variants={fadeUp} className="lg:hidden pt-1">
                 <CtaButton onClick={scrollToForm} className="w-full sm:w-auto justify-center">
-                  <span className="sm:hidden">GARANTIR MINHA VAGA</span>
-                  <span className="hidden sm:inline">QUERO GARANTIR MINHA VAGA</span>
+                  APRENDER E GANHAR MAIS
                 </CtaButton>
               </motion.div>
             </motion.div>
