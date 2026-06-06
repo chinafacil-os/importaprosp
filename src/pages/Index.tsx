@@ -769,7 +769,7 @@ export default function Index() {
             ))}
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={fadeUp} className="flex justify-center">
-            <CtaButton onClick={scrollToForm}>QUERO GARANTIR MINHA VAGA</CtaButton>
+            <CtaButton onClick={scrollToForm}>GARANTIR MINHA VAGA</CtaButton>
           </motion.div>
         </div>
       </section>
@@ -882,7 +882,7 @@ export default function Index() {
             })}
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={fadeUp} className="flex justify-center pt-2">
-            <CtaButton onClick={scrollToForm}>QUERO APRENDER ISSO NA PRÁTICA</CtaButton>
+            <CtaButton onClick={scrollToForm}>APRENDER NA PRÁTICA</CtaButton>
           </motion.div>
         </div>
       </section>
@@ -945,7 +945,7 @@ export default function Index() {
             </div>
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={fadeUp} className="flex justify-center">
-            <CtaButton onClick={scrollToForm}>GARANTIR MINHA VAGA COM THIAGO</CtaButton>
+            <CtaButton onClick={scrollToForm}>GARANTIR MINHA VAGA</CtaButton>
           </motion.div>
         </div>
       </section>
@@ -1005,7 +1005,7 @@ export default function Index() {
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={fadeUp} className="text-center pt-2">
-            <CtaButton onClick={scrollToForm}>GARANTIR MINHA ANÁLISE DE PARTICIPAÇÃO</CtaButton>
+            <CtaButton onClick={scrollToForm}>GARANTIR MINHA VAGA</CtaButton>
           </motion.div>
         </div>
       </section>
