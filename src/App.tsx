@@ -6,8 +6,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Index from "./pages/Index";
 
-const Obrigado = lazy(() => import("./pages/Obrigado"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+const Obrigado       = lazy(() => import("./pages/Obrigado"));
+const Desqualificado = lazy(() => import("./pages/Desqualificado"));
+const NotFound       = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/obrigado" element={<Obrigado />} />
+            <Route path="/desqualificado" element={<Desqualificado />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

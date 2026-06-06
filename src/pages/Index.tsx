@@ -518,7 +518,7 @@ const MultiStepForm = () => {
       sendToSheets(next, false).catch(() => {}).finally(() => {
         trackLead();
         setSubmit(false);
-        setStep(TOTAL_Q + 1);
+        navigate("/desqualificado");
       });
       return;
     }
@@ -545,46 +545,21 @@ const MultiStepForm = () => {
 
   const pct = step === 0 ? 0 : isQStep ? Math.round((step / TOTAL_Q) * 95) : 100;
 
-  /* Tela de desqualificação */
-  if (step === TOTAL_Q + 1) {
-    return (
-      <div className="bg-card border border-white/8 rounded-xl p-5 sm:p-8 text-center space-y-5">
-        <div className="w-12 h-12 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center mx-auto">
-          <XCircle className="w-5 h-5 text-white/30" />
-        </div>
-        <div className="space-y-3">
-          <p className="font-display text-base text-white">Agradecemos seu interesse!</p>
-          <p className="font-body text-white/50 text-[13px] leading-relaxed max-w-sm mx-auto">
-            Pelos dados enviados, ainda não é o momento de importar via container, nem mesmo no compartilhado. Mas isso não te impede de começar.
-          </p>
-          <p className="font-body text-white/70 text-[13px] leading-relaxed max-w-sm mx-auto">
-            Recomendamos a <span className="text-white font-semibold">importação simplificada</span>, ideal para quem está iniciando. Você pode começar a partir de <span className="text-primary font-semibold">R$ 1.000</span>.
-          </p>
-        </div>
-        <a href={CURSO_FALLBACK_URL} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-[#8B0A0A] via-[#BB1717] to-[#D44444] text-white font-body font-bold text-[12px] uppercase tracking-wider px-5 py-3 rounded hover:brightness-110 transition-all">
-          Clique aqui e veja o passo a passo <ArrowRight className="w-3.5 h-3.5" />
-        </a>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-card border border-white/8 rounded-xl p-5 sm:p-6 space-y-4">
       {/* Progress */}
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <div className="flex justify-between items-center">
-          <span className="text-[10px] text-white/35 font-body font-medium">
-            {step === 0 ? "Comece pelos seus dados" : isQStep ? `Pergunta ${step} de ${TOTAL_Q}` : "Finalizando..."}
+          <span className="text-[11px] text-white/40 font-body font-medium">
+            {step === 0 ? "Etapa 1 de 6 — Seus dados" : isQStep ? `Etapa ${step + 1} de 6 — Pergunta ${step} de ${TOTAL_Q}` : "Concluído"}
           </span>
-          <span className="text-[10px] text-primary font-body font-bold">{pct}%</span>
+          <span className="text-[11px] text-primary font-body font-bold">{pct}%</span>
         </div>
-        <div className="h-0.5 bg-white/8 rounded-full overflow-hidden">
-          <motion.div className="h-full bg-primary rounded-full" initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 0.4 }} />
-        </div>
-        <div className="flex gap-0.5">
-          {multiStepQuestions.map((_, i) => (
-            <div key={i} className={`h-0.5 flex-1 rounded-full transition-all duration-300 ${isQStep && i < qIndex ? "bg-primary" : isQStep && i === qIndex ? "bg-primary/50" : "bg-white/8"}`} />
+        {/* Segmented step bar */}
+        <div className="flex gap-1">
+          {[0, ...multiStepQuestions.map((_, i) => i + 1)].map((s) => (
+            <div key={s} className={`h-1 flex-1 rounded-full transition-all duration-300 ${step > s ? "bg-primary" : step === s ? "bg-primary/60" : "bg-white/10"}`} />
           ))}
         </div>
       </div>
@@ -621,7 +596,7 @@ const MultiStepForm = () => {
                 </div>
               </div>
               <button type="submit" className="w-full bg-gradient-to-r from-[#8B0A0A] via-[#BB1717] to-[#D44444] text-white font-body font-bold text-[13px] uppercase tracking-wider py-3 rounded hover:brightness-110 transition-all flex items-center justify-center gap-2 glow-blue">
-                Continuar — responder 4 perguntas <ArrowRight className="w-3.5 h-3.5" />
+                Continuar <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <p className="text-center inline-flex items-center justify-center gap-1.5 w-full text-[10px] text-white/25 font-body">
                 <Shield className="w-2.5 h-2.5" /> Seus dados estão protegidos
@@ -646,7 +621,7 @@ const MultiStepForm = () => {
                 </div>
                 <button type="submit" disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-[#8B0A0A] via-[#BB1717] to-[#D44444] text-white font-body font-bold text-[13px] uppercase tracking-wider py-3 rounded hover:brightness-110 transition-all flex items-center justify-center gap-2 glow-blue disabled:opacity-50 disabled:cursor-wait">
-                  {isSubmitting ? <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Enviando...</> : <>Garantir minha vaga <ArrowRight className="w-3.5 h-3.5" /></>}
+                  {isSubmitting ? <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Enviando...</> : <>Finalizar <ArrowRight className="w-3.5 h-3.5" /></>}
                 </button>
               </form>
             ) : (
