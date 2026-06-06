@@ -163,7 +163,7 @@ const SectionLabel = ({ text }: { text: string }) => (
 );
 
 const SectionHeading = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <h2 className={`font-display text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.3] text-center ${className}`}>
+  <h2 className={`font-display text-[clamp(1.4rem,2.5vw,2rem)] leading-[1.3] text-center ${className}`}>
     {children}
   </h2>
 );
@@ -199,7 +199,7 @@ const LOGOS = [
 ];
 
 const LogoMarquee = () => (
-  <section className="py-8 sm:py-10 border-b border-white/5 overflow-hidden">
+  <section className="py-10 sm:py-12 border-b border-white/5 overflow-hidden">
     <p className="text-center font-body text-[10px] sm:text-[11px] text-white/25 uppercase tracking-[0.22em] mb-6 px-4">
       Marcas que já importam diretamente da China
     </p>
@@ -398,7 +398,7 @@ const StickyHeader = ({ onCtaClick }: { onCtaClick: () => void }) => {
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 left-0 right-0 z-50 glass-strong border-b border-white/8"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-12 sm:h-13 flex items-center justify-between gap-3">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-12 sm:h-14 flex items-center justify-between gap-3">
 
         {/* Marca — desktop */}
         <span className="hidden sm:flex items-center gap-2 flex-shrink-0">
@@ -683,11 +683,11 @@ export default function Index() {
 
               {/* Headline */}
               <motion.div variants={fadeUp} className="space-y-0.5">
-                <h1 className="font-display text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.1] text-white">
+                <h1 className="font-display text-[clamp(1.6rem,3.5vw,2.75rem)] leading-[1.1] text-white">
                   Enquanto muitos empresários{" "}
                   <span className="text-white/35">reclamam da margem…</span>
                 </h1>
-                <h1 className="font-display text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.1]">
+                <h1 className="font-display text-[clamp(1.6rem,3.5vw,2.75rem)] leading-[1.1]">
                   <span className="text-gradient glow-text">outros compram direto da China</span>
                   <span className="text-white"> e dominam o mercado.</span>
                 </h1>
@@ -715,7 +715,7 @@ export default function Index() {
 
               {/* Mobile-only CTA */}
               <motion.div variants={fadeUp} className="lg:hidden pt-1">
-                <CtaButton onClick={scrollToForm}>QUERO GARANTIR MINHA VAGA</CtaButton>
+                <CtaButton onClick={scrollToForm} className="w-full sm:w-auto justify-center">QUERO GARANTIR MINHA VAGA</CtaButton>
               </motion.div>
             </motion.div>
 
@@ -754,7 +754,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           STATS
           ══════════════════════════════════════ */}
-      <section className="py-10 px-4 sm:px-6 border-b border-white/5">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 border-b border-white/5">
         <div className="max-w-4xl mx-auto space-y-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger}
             className="grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
@@ -791,7 +791,7 @@ export default function Index() {
               </motion.p>
             </div>
 
-            <motion.div variants={stagger} className="grid md:grid-cols-2 gap-5">
+            <motion.div variants={stagger} className="grid sm:grid-cols-2 gap-5">
               {/* Grupo A */}
               <motion.div variants={scaleIn} className="relative rounded-xl border border-white/8 bg-card p-6 space-y-4 overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-white/8" />
@@ -972,7 +972,7 @@ export default function Index() {
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger}
-            className="grid md:grid-cols-2 gap-5">
+            className="grid sm:grid-cols-2 gap-5">
             <motion.div variants={fadeUp} className="bg-card border border-primary/15 rounded-xl p-6 space-y-4">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-primary" />
@@ -1113,7 +1113,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           BOTTOM CTA — sem formulário duplicado
           ══════════════════════════════════════ */}
-      <section className="py-14 sm:py-16 px-4 sm:px-6 bg-grid">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-grid">
         <div className="max-w-xl mx-auto text-center space-y-5">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} variants={stagger}>
             <motion.div variants={fadeUp}>
@@ -1143,7 +1143,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           FOOTER
           ══════════════════════════════════════ */}
-      <footer className="border-t border-white/5 py-8 px-4 sm:px-6">
+      <footer className="border-t border-white/5 py-8 sm:py-12 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <div className="space-y-0.5">
             <p className="font-display text-white text-sm">Importa PRO Experience 2026</p>
