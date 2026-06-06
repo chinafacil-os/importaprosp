@@ -707,8 +707,8 @@ export default function Index() {
                   { icon: MapPin,   text: "São Paulo, SP" },
                   { icon: Star,     text: "Vagas limitadas" },
                 ].map(({ icon: Icon, text }) => (
-                  <span key={text} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/8 font-body text-white/45 text-[12px]">
-                    <Icon className="w-3 h-3 text-primary" /> {text}
+                  <span key={text} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#D4A843]/8 border border-[#D4A843]/30 font-body text-[#D4A843] text-[12px] font-medium shadow-[0_0_12px_rgba(212,168,67,0.08)]">
+                    <Icon className="w-3 h-3 text-[#D4A843]" /> {text}
                   </span>
                 ))}
               </motion.div>
