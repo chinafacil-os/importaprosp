@@ -668,17 +668,16 @@ export default function Index() {
         </div>
 
         <div className="relative z-10 max-w-6xl w-full mx-auto">
-          <div className="flex flex-col lg:flex-row items-start gap-6 sm:gap-8 lg:gap-14 xl:gap-20">
+          <div className="flex flex-col lg:flex-row items-start gap-8 sm:gap-10 lg:gap-14 xl:gap-20">
 
             {/* ── LEFT: Copy ── */}
-            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex-1 min-w-0 space-y-6 lg:pt-4 min-h-[100svh] lg:min-h-0">
+            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex-1 min-w-0 space-y-6 lg:pt-4">
 
               {/* Badge */}
               <motion.div variants={fadeUp}>
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl sm:rounded-full bg-[#D4A843]/8 border border-[#D4A843]/30 font-body text-[#D4A843] text-[11px] font-bold uppercase tracking-[0.15em]">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#D4A843]/8 border border-[#D4A843]/30 font-body text-[#D4A843] text-[11px] font-bold uppercase tracking-[0.15em]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4A843] flex-shrink-0 animate-pulse" />
-                  <span className="sm:hidden">26 Jun · SP · Presencial</span>
-                  <span className="hidden sm:inline">Imersão Presencial · 26 de Junho · São Paulo</span>
+                  <span>Imersão Presencial</span>
                 </span>
               </motion.div>
 
@@ -729,7 +728,7 @@ export default function Index() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full lg:w-[400px] xl:w-[420px] lg:flex-shrink-0 space-y-3"
+              className="w-full lg:w-[400px] xl:w-[420px] lg:flex-shrink-0 space-y-3 border-t border-white/8 pt-2 lg:border-0 lg:pt-0"
             >
               {/* Form header */}
               <div className="space-y-1">
