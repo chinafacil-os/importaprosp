@@ -415,20 +415,20 @@ const StickyHeader = ({ onCtaClick }: { onCtaClick: () => void }) => {
         </span>
 
         {/* Cronômetro compacto */}
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-1 sm:gap-1.5">
           {[
-            { value: countdown.days,    label: "d" },
-            { value: countdown.hours,   label: "h" },
-            { value: countdown.minutes, label: "m" },
-            { value: countdown.seconds, label: "s" },
+            { value: countdown.days,    label: "dias" },
+            { value: countdown.hours,   label: "horas" },
+            { value: countdown.minutes, label: "min" },
+            { value: countdown.seconds, label: "seg" },
           ].map(({ value, label }, i) => (
             <div key={label} className="flex items-center">
-              {i > 0 && <span className="text-white/15 text-[11px] font-bold mx-0.5 sm:mx-1">:</span>}
-              <div className="flex items-baseline gap-[2px]">
-                <span className="font-display text-sm sm:text-[15px] text-white tabular-nums leading-none">
+              {i > 0 && <span className="text-white/30 text-[12px] font-bold mx-1 sm:mx-1.5 leading-none">:</span>}
+              <div className="flex flex-col items-center gap-[3px]">
+                <span className="font-display text-[13px] sm:text-[15px] text-white tabular-nums leading-none">
                   {String(value).padStart(2, "0")}
                 </span>
-                <span className="font-body text-[8px] sm:text-[9px] text-white/30 leading-none">{label}</span>
+                <span className="font-body text-[7px] sm:text-[8px] text-white/55 uppercase leading-none tracking-wide">{label}</span>
               </div>
             </div>
           ))}
@@ -660,7 +660,7 @@ export default function Index() {
       {/* ══════════════════════════════════════
           HERO — split: copy | form
           ══════════════════════════════════════ */}
-      <section className="relative min-h-[100svh] flex items-center px-4 sm:px-6 pt-28 sm:pt-32 pb-16 sm:pb-20 bg-grid-fade">
+      <section className="relative min-h-[100svh] flex items-center px-4 sm:px-6 pt-16 sm:pt-20 pb-16 sm:pb-20 bg-grid-fade">
         {/* Radial glow */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.06]"
@@ -715,7 +715,10 @@ export default function Index() {
 
               {/* Mobile-only CTA */}
               <motion.div variants={fadeUp} className="lg:hidden pt-1">
-                <CtaButton onClick={scrollToForm} className="w-full sm:w-auto justify-center">QUERO GARANTIR MINHA VAGA</CtaButton>
+                <CtaButton onClick={scrollToForm} className="w-full sm:w-auto justify-center">
+                  <span className="sm:hidden">GARANTIR MINHA VAGA</span>
+                  <span className="hidden sm:inline">QUERO GARANTIR MINHA VAGA</span>
+                </CtaButton>
               </motion.div>
             </motion.div>
 
@@ -760,7 +763,7 @@ export default function Index() {
             className="grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
             {eventStats.map(s => (
               <motion.div key={s.label} variants={fadeUp} className="text-center space-y-0.5">
-                <p className="font-display text-xl sm:text-2xl text-primary leading-none">{s.value}</p>
+                <p className="font-display text-2xl sm:text-3xl lg:text-4xl text-primary leading-none">{s.value}</p>
                 <p className="font-body text-[9px] text-primary font-bold uppercase tracking-widest">{s.label}</p>
                 <p className="font-body text-white/35 text-[11px] leading-snug">{s.desc}</p>
               </motion.div>
@@ -903,16 +906,16 @@ export default function Index() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={scaleIn}
             className="group relative rounded-2xl overflow-hidden bg-card border border-white/8 hover:border-primary/20 transition-all duration-500">
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent z-20" />
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col sm:flex-row">
               {/* Foto — substitua pelo <img> quando tiver o arquivo */}
-              <div className="relative md:w-[280px] lg:w-[300px] md:flex-shrink-0 h-56 md:h-auto overflow-hidden bg-gradient-to-br from-primary/10 to-transparent flex items-center justify-center">
+              <div className="relative sm:w-[220px] lg:w-[280px] sm:flex-shrink-0 h-48 sm:h-auto overflow-hidden bg-gradient-to-br from-primary/10 to-transparent flex items-center justify-center">
                 <span className="font-display text-7xl text-primary/8">TM</span>
                 {/*
                   Para adicionar foto: descomente abaixo e adicione /public/thiago-speaker.webp
                   <img src="/thiago-speaker.webp" alt="Thiago Martins"
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
                 */}
-                <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-card" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-card" />
               </div>
 
               {/* Bio */}
