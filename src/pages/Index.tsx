@@ -410,8 +410,8 @@ const StickyHeader = ({ onCtaClick }: { onCtaClick: () => void }) => {
 
         {/* Data — mobile */}
         <span className="sm:hidden flex items-center gap-1.5 flex-shrink-0">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-          <span className="font-body text-[10px] text-primary font-bold uppercase tracking-wider">26 Jun · SP</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#D4A843] animate-pulse" />
+          <span className="font-body text-[10px] text-[#D4A843] font-bold uppercase tracking-wider">26 Jun · SP</span>
         </span>
 
         {/* Cronômetro compacto */}
@@ -675,8 +675,8 @@ export default function Index() {
 
               {/* Badge */}
               <motion.div variants={fadeUp}>
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/8 border border-primary/20 font-body text-primary text-[11px] font-bold uppercase tracking-[0.15em]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#D4A843]/8 border border-[#D4A843]/30 font-body text-[#D4A843] text-[11px] font-bold uppercase tracking-[0.15em]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4A843] animate-pulse" />
                   Imersão Presencial · 26 de Junho · São Paulo
                 </span>
               </motion.div>

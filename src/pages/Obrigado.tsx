@@ -66,12 +66,12 @@ const Obrigado = () => {
         </p>
 
         {/* Event info */}
-        <div className="inline-flex flex-col sm:flex-row items-center gap-3 px-5 py-3 rounded-xl bg-primary/5 border border-primary/20 text-sm font-body font-semibold mb-8">
-          <span className="flex items-center gap-2 text-primary">
+        <div className="inline-flex flex-col sm:flex-row items-center gap-3 px-5 py-3 rounded-xl bg-[#D4A843]/6 border border-[#D4A843]/25 text-sm font-body font-semibold mb-8">
+          <span className="flex items-center gap-2 text-[#D4A843]">
             <Calendar className="w-4 h-4" />26 de Junho de 2026
           </span>
           <span className="text-white/20 hidden sm:block">·</span>
-          <span className="flex items-center gap-2 text-primary">
+          <span className="flex items-center gap-2 text-[#D4A843]">
             <MapPin className="w-4 h-4" />São Paulo, SP
           </span>
         </div>
